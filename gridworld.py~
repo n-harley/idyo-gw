@@ -1,0 +1,72 @@
+import numpy as np
+import pandas
+import matplotlib.pyplot as plt
+
+action_labels = ['start','forward','left','right','PICKUP','toggle']
+
+def load_data(filename):
+    return pandas.read_csv(filename)
+
+def mission(data,id):
+    return data.loc[data["melody.id"]==id]
+
+def ic(data,id):
+    return mission(data,id)["information.content"].values
+
+def ig(data,id):
+    return mission(data,id)["information.gain"].values
+
+def h(data,id):
+    return mission(data,id)['entropy'].values
+
+def h_ic(data,id):
+    return h(data,id) / ic(data,id)
+
+def action(data,id):
+    return mission(data,id)['action'].values
+
+def pickup(data,id):
+    return np.where(action(data,id) == 4)[0][0]
+
+def ic_diff(data,id):
+    return np.insert(np.diff(ic(data,id)),0,[0])
+
+def h_diff(data,id):
+    return np.insert(np.diff(h(data,id)),0,[0])
+
+def ig_diff(data,id):
+    return np.insert(np.diff(ig(data,id)),0,[0])
+
+def min_ic(data,id):
+    return np.argmin(ic(data,id))
+
+def min_h(data,id):
+    return np.argmin(h(data,id))
+
+def max_h_diff(data,id):
+    return np.argmax(h_diff(data,id))
+
+def max_ic_diff(data,id):
+    return np.argmax(ic_diff(data,id))
+
+def max_ig_diff(data,id):
+    return np.argmax(ig_diff(data,id))
+
+def max_h_ic(data,id):
+    return np.argmax(h_ic(data,id))
+
+def plot(data,label):
+    plt.plot(data,label=label)
+    plt.legend()
+
+def set_xaxis(acns):
+    acn_ls = [action_labels[a] for a in acns]
+    #ax = plt.gca()
+    plt.xticks(np.arange(len(acns)),acn_ls,rotation='vertical')
+    #ax.set_xticklabels(acn_ls)
+    plt.xlabel('action')
+    plt.xlim(0,len(acns)-1)
+
+def mark(loc,c='y',linestyle='-',label=''):
+    plt.axvline(loc,-10,10,c=c,linestyle=linestyle)
+    plt.text(loc,1,label,rotation=90)
