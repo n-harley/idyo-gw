@@ -1,1 +1,1 @@
-# idyo-gw
+# idyog: The Information Dynamics of Gridworld
