@@ -83,6 +83,12 @@ def max_ig_diff(data,id):
 def max_h_ic(data,id):
     return np.argmax(h_ic(data,id))
 
+def eval_mission(data,id,estimator):
+    return pickup(data,id) == estimator(data,id)
+
+def eval_model(data,estimator):
+    return np.sum([1 for i in np.arange(1,1000) if eval_mission(data,i,estimator)])
+
 def plot(data,label):
     plt.plot(data,label=label)
     plt.legend()
@@ -96,7 +102,6 @@ def set_xaxis(acns):
 def mark(loc,c='y',linestyle='-',label=''):
     plt.axvline(loc,-10,10,c=c,linestyle=linestyle)
     plt.text(loc,1,label,rotation=90)
-
 
 def display_state(data,id,s,a,o):
     state = states[id-1][s-1]
