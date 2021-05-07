@@ -40,7 +40,10 @@ def h(data,id):
     return mission(data,id)['entropy'].values
 
 def h_ic(data,id):
-    return h(data,id) / ic(data,id)
+    return np.array([x/y for (x,y) in zip(h(data,id),ic(data,id))])
+
+def ig_ic(data,id):
+    return np.array([x/y for (x,y) in zip(ig(data,id),ic(data,id))])
 
 def action(data,id):
     return mission(data,id)['action'].values
@@ -66,28 +69,41 @@ def ig_diff(data,id):
     return np.insert(np.diff(ig(data,id)),0,[0])
 
 def min_ic(data,id):
-    return np.argmin(ic(data,id))
+    return np.argmin(ic(data,id)[:-1])
 
 def min_h(data,id):
-    return np.argmin(h(data,id))
+    return np.argmin(h(data,id)[:-1])
 
 def max_h_diff(data,id):
-    return np.argmax(h_diff(data,id))
+    return np.argmax(h_diff(data,id)[2:-1])+2
+
+def max_h_diff_minus1(data,id):
+    return max_h_diff(data,id)-1
 
 def max_ic_diff(data,id):
-    return np.argmax(ic_diff(data,id))
+    return np.argmax(ic_diff(data,id)[2:-1])+2
+
+def max_ic_diff_minus1(data,id):
+    return max_ic_diff(data,id)-1
 
 def max_ig_diff(data,id):
-    return np.argmax(ig_diff(data,id))
+    return np.argmax(ig_diff(data,id)[2:-1])+2
+
+def max_ig_diff_minus1(data,id):
+    return max_ig_diff(data,id)-1
 
 def max_h_ic(data,id):
-    return np.argmax(h_ic(data,id))
+    return np.argmax(h_ic(data,id)[1:-1])+1
+
+def max_ig_ic(data,id):
+    return np.argmax(ig_ic(data,id)[1:-1])+1
 
 def eval_mission(data,id,estimator):
     return pickup(data,id) == estimator(data,id)
 
 def eval_model(data,estimator):
-    return np.sum([1 for i in np.arange(1,1000) if eval_mission(data,i,estimator)])
+    res = np.array([eval_mission(data,i,estimator) for i in np.arange(1,1000)])
+    return len(np.where(res)[0])
 
 def plot(data,label):
     plt.plot(data,label=label)
