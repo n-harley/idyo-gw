@@ -20,22 +20,22 @@ We consider a highly simplified scenario in which a gridworld agent must open a 
 
 ## Data Set
 
-The data set (dataset.pkl) contains 1000 example missions recording the agent behaviour required to successfully 'open door'. Each example mission begins with a random configuration of agent, key and door. dataset.ipynb shows the content of the dataset. 
+The [data set](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/dataset.ipynb) (dataset.pkl) contains 1000 example missions recording the agent behaviour required to successfully 'open door'. Each example mission begins with a random configuration of agent, key and door. dataset.ipynb shows the content of the dataset. 
 
 ## Representation
 
-We represent each example mission as a sequence of objects. Each object captures the state of the gridworld at that point in the mission, as well as the action performed immediately prior to entering that state. We define a collection of features which capture abstract information about the gridworld states. These are described in representation.pdf.
+We represent each example mission as a sequence of objects. Each object captures the state of the gridworld at that point in the mission, as well as the action performed immediately prior to entering that state. We define a collection of features which capture abstract information about the gridworld states. These features are described [here](https://github.com/n-harley/idyog/blob/main/representation.pdf).
 
 ## Statistical Modelling
 
-We construct statistical models of the data set using IDyOM (<http://mtpearce.github.io/idyom/>). (IDyOM is primarily intended for modelling musical sequences. However, the basic principle are more generally applicable.) We consider 6 different models:
+We construct statistical models of the feature data using IDyOM (<http://mtpearce.github.io/idyom/>). (IDyOM is primarily intended for modelling musical sequences. However, the basic principle are more generally applicable.) We consider 6 different models:
 
-- [idyom-action-action]()
-- [idyom-select-maxlinks2]()
-- [idyom-select-maxlinks2-plus]()
-- [idyom-select-maxlinks3]()
-- [idyom-select-maxlinks3-plus]()
-- [idyom-select-maxlinks3-minus]()
+- [idyom-action-action](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/idyom-action-action.ipynb)
+- [idyom-select-maxlinks2](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/idyom-select-maxlinks2.ipynb)
+- [idyom-select-maxlinks2-plus](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/idyom-select-maxlinks2-plus.ipynb)
+- [idyom-select-maxlinks3](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/idyom-select-maxlinks3.ipynb)
+- [idyom-select-maxlinks3-plus](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/idyom-select-maxlinks3-plus.ipynb)
+- [idyom-select-maxlinks3-minus](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/idyom-select-maxlinks3-minus.ipynb)
 
 ## Sub-Task Boundary Detection
 
@@ -54,4 +54,4 @@ Using the models we can compute the information content of each object in a sequ
 
 ## Results 
 
-We calculate the numbers of correctly identified subtask boundaries for each model and each estimator. 75% of the subtask boundaries were correctly identified by using the model [idyom-select-maxlinks2-plus]() and the estimator max_ig_ic.
+We calculate the numbers of correctly identified subtask boundaries for each model and each estimator. The results tabel is available [here](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/subtask-detection.ipynb). 75% of the subtask boundaries were correctly identified by using the model [idyom-select-maxlinks2-plus]() and the estimator max_ig_ic.
