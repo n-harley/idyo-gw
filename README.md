@@ -6,7 +6,7 @@
 
 ## Overview
 
-This repository contains preliminary experiements investigating the use of statistical models to detect sub-task boundaries in data describing agent behaviour in minimalistic gridword agent behaviour environments.
+This repository contains preliminary experiements investigating the use of statistical models to detect sub-task boundaries in data describing the behaviour of agents in minimalistic gridword environments.
 
 ## Introduction
 
