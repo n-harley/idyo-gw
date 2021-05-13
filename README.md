@@ -4,12 +4,6 @@
 
 <https://n-harley.github.io/idyog>
 
-[TEST](test.md)
-
-## Overview
-
-This repository contains preliminary experiements investigating the use of statistical models to detect sub-task boundaries in data describing the behaviour of agents in minimalistic gridword environments.
-
 ## Introduction
 
 - Partial observability, dynamic environments, hidden rewards and explainability are problems for RL models. 
