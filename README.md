@@ -1,8 +1,10 @@
-# IDyoG: The Information Dynamics of Gridworld
+# IDyOG: The Information Dynamics of Gridworld
 
 #### Statistical modelling of agent behaviour in minimalistic gridworld environments.  
 
 <https://n-harley.github.io/idyog>
+
+[TEST](test.md)
 
 ## Overview
 
