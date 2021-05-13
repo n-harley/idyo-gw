@@ -37,11 +37,12 @@ We represent each example mission as a sequence of objects. Each object represen
 The features are used to construct statistical models of the object sequences. These models are constructed using IDyOM (<http://mtpearce.github.io/idyom/>). (IDyOM is primarily intended for modelling musical sequences. However, the basic principle are more generally applicable.) We use a vairety of models constructed by running IDyOM with different parameters. The following notebooks describe each of the models and explore the results. 
 
 - [idyom-action-action](./idyom-action-action.ipynb)
-- [idyom-select-maxlinks2](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/idyom-select-maxlinks2.ipynb)
-- [idyom-select-maxlinks2-plus](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/idyom-select-maxlinks2-plus.ipynb)
-- [idyom-select-maxlinks3](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/idyom-select-maxlinks3.ipynb)
-- [idyom-select-maxlinks3-plus](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/idyom-select-maxlinks3-plus.ipynb)
-- [idyom-select-maxlinks3-minus](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/idyom-select-maxlinks3-minus.ipynb)
+- [idyom-select-maxlinks2](./idyom-select-maxlinks2.ipynb)
+- [idyom-select-maxlinks2-plus](./idyom-select-maxlinks2-plus.ipynb)
+- [idyom-select-maxlinks3](./idyom-select-maxlinks3.ipynb)
+- [idyom-select-maxlinks3-plus](./idyom-select-maxlinks3-plus.ipynb)
+- [idyom-select-maxlinks3-minus](./idyom-select-maxlinks3-minus.ipynb)
+- TODO: models with a limit on the order
 
 ## Sub-Task Boundary Detection
 
