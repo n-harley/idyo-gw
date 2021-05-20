@@ -24,8 +24,7 @@ The [data set](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/data
 
 ## Representation
 
-We represent each example mission as a sequence of objects. Each object represents the state of the gridworld at that point in the mission, as well as the action performed immediately prior to entering that state. We represent gridworld states as a collection of feature values. These features capture abstract information about the grid from both bird's-eye and first-person perspectives. These features are described [here](https://github.com/n-harley/idyog/blob/main/representation.pdf):
-<embed src="https://n-harley.github.io/idyog/representation.pdf" type="application/pdf" />
+We represent each example mission as a sequence of objects. Each object represents the state of the gridworld at that point in the mission, as well as the action performed immediately prior to entering that state. We represent gridworld states as a collection of feature values. These features capture abstract information about the grid from both bird's-eye and first-person perspectives. These features are described [here](./representation.md).
 
 ## Statistical Modelling
 
