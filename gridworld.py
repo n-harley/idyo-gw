@@ -1,4 +1,5 @@
 import pickle
+import os
 import numpy as np
 import pandas
 import matplotlib.pyplot as plt
@@ -12,8 +13,15 @@ with open('gridworld-states.pickle', 'rb') as f:
 action_labels = ['start','forward','left','right','pickup','toggle']
 orientation_rotation = [0,270,180,90]
 
-def load_data(filename):
-    return pandas.read_csv("models/"+filename)
+def list_model_names():
+    def rm_ext(fn):
+        return fn[:fn.find(".")]
+    
+    model_filenames = os.listdir("models/")
+    return [rm_ext(mfn) for mfn in model_filenames]
+
+def load_data(model_name):
+    return pandas.read_csv("models/"+model_name+".csv")
 
 def mission(data,id):
     return data.loc[data["melody.id"]==id]
