@@ -13,7 +13,7 @@ action_labels = ['start','forward','left','right','pickup','toggle']
 orientation_rotation = [0,270,180,90]
 
 def load_data(filename):
-    return pandas.read_csv(filename)
+    return pandas.read_csv("models/"+filename)
 
 def mission(data,id):
     return data.loc[data["melody.id"]==id]
@@ -36,11 +36,11 @@ def ic(data,id):
 def ig(data,id):
     return mission(data,id)["information.gain"].values
 
-def h(data,id):
+def en(data,id):
     return mission(data,id)['entropy'].values
 
-def h_ic(data,id):
-    return np.array([x/y for (x,y) in zip(h(data,id),ic(data,id))])
+def en_ic(data,id):
+    return np.array([x/y for (x,y) in zip(en(data,id),ic(data,id))])
 
 def ig_ic(data,id):
     return np.array([x/y for (x,y) in zip(ig(data,id),ic(data,id))])
@@ -62,8 +62,8 @@ def pickup(data,id):
 def ic_diff(data,id):
     return np.insert(np.diff(ic(data,id)),0,[0])
 
-def h_diff(data,id):
-    return np.insert(np.diff(h(data,id)),0,[0])
+def en_diff(data,id):
+    return np.insert(np.diff(en(data,id)),0,[0])
 
 def ig_diff(data,id):
     return np.insert(np.diff(ig(data,id)),0,[0])
@@ -71,14 +71,14 @@ def ig_diff(data,id):
 def min_ic(data,id):
     return np.argmin(ic(data,id)[:-1])
 
-def min_h(data,id):
-    return np.argmin(h(data,id)[:-1])
+def min_en(data,id):
+    return np.argmin(en(data,id)[:-1])
 
-def max_h_diff(data,id):
-    return np.argmax(h_diff(data,id)[2:-1])+2
+def max_en_diff(data,id):
+    return np.argmax(en_diff(data,id)[2:-1])+2
 
-def max_h_diff_minus1(data,id):
-    return max_h_diff(data,id)-1
+def max_en_diff_minus1(data,id):
+    return max_en_diff(data,id)-1
 
 def max_ic_diff(data,id):
     return np.argmax(ic_diff(data,id)[2:-1])+2
@@ -92,8 +92,8 @@ def max_ig_diff(data,id):
 def max_ig_diff_minus1(data,id):
     return max_ig_diff(data,id)-1
 
-def max_h_ic(data,id):
-    return np.argmax(h_ic(data,id)[1:-1])+1
+def max_en_ic(data,id):
+    return np.argmax(en_ic(data,id)[1:-1])+1
 
 def max_ig_ic(data,id):
     return np.argmax(ig_ic(data,id)[1:-1])+1
