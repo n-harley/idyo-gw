@@ -1,4 +1,7 @@
-# Models
+---
+layout: page
+title: Models
+---
 
 ## idyom-action-action
 
