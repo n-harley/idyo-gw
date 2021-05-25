@@ -1,4 +1,7 @@
-# IDyOG: The Information Dynamics of Gridworld
+---
+layout: page
+title: The Information Dynamics of Gridworld
+---
 
 #### Statistical modelling of agent behavior in minimalistic gridworld environments.  
 
