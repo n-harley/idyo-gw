@@ -1,5 +1,7 @@
-# Sub-task boundary detection
-
+---
+layout: page
+title: Sub-Task Detection
+--- 
 We consider the following detection methods:
 
 - `min_ic`: minimum information content
