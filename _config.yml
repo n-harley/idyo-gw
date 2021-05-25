@@ -2,21 +2,22 @@ title: idyog
 author:
   name: Nicholas Harley
   email: nicholas.harley@vub.be
+description: This repository contains preliminary experiements investigating the use of statistical models to detect sub-task boundaries in data describing the behaviour of agents in minimalistic gridword environments.
 plugins:
   - jekyll-relative-links
-  - jekyll-jupyter-notebook
+  - jekyll-feed
+  - jekyll-seo-tag
 relative_links:
   enabled: true
   collections: true
-theme: minima
-description: This repository contains preliminary experiements investigating the use of statistical models to detect sub-task boundaries in data describing the behaviour of agents in minimalistic gridword environments.
 show_downloads: "true"
+theme: minima
+minima:
+  social_links: 
+    github: n-harley
 header_pages:
   - dataset-explorer.ipynb
   - representation.md
   - models.md
   - subtask-detection.md
   - subtask-detection.ipynb
-minima:
-  social_links: 
-    github: n-harley
