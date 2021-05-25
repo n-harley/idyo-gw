@@ -14,7 +14,7 @@ The resulting model predicts the next `ACTION` from sequences of previous `ACTIO
 
 The mean information content of the model is 1.6158307.
 
-## idyom-action-action-orderbound1
+## idyom-action-action-stmo1-ltmo1
 
 This model was constructed using the following command:
 ```
@@ -156,3 +156,26 @@ The model predicts the next `ACTION` from the following set of viewpoints:
 These are the viewpoints selected in [idyom-select-maxlinks3](./idyom-select-maxlinks3.ipynb) minus the ones whose symmetric counterparts were not included.
 
 The average IC was 0.68368334
+
+## idyom-action-action-stmo1
+
+```
+(idyom:idyom 33 '(action) '(action) :stmo '(:order-bound 1))
+```
+Mean IC: 1.6254971
+
+## idyom-select-maxlinks2-plus-stmo1
+
+```
+(idyom:idyom 33 '(action) '((action agentinfront)(action agentright)(action agentleft)(action agentinfrontleft)(action agentinfrontleft)(action canseedoor)(action canseekey)(action distance)) :stmo '(:order-bound 1))
+```
+
+Mean IC: 0.7924194
+
+## idyom-select-maxlinks2-plus-stmo1-ltmo1
+
+```
+(idyom:idyom 33 '(action) '((action agentinfront)(action agentright)(action agentleft)(action agentinfrontleft)(action agentinfrontleft)(action canseedoor)(action canseekey)(action distance)) :output-path "/Users/nick/Dropbox" :detail 3 :separator "," :stmo '(:order-bound 1) :ltmo '(:order-bound 1))
+```
+
+Mean IC: 1.0009514
