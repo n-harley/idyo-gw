@@ -41,7 +41,7 @@ The models give the information content of each object in a sequence (the degree
 
 We calculate the numbers of correctly identified subtask boundaries for each model and each estimator. The results table is available [here](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/subtask-detection.ipynb).
 
-~75% of the subtask boundaries were correctly identified by using the model [idyom-select-maxlinks2-plus](/models.html#idyom-select-maxlinks2-plus) and the estimator `max_ig_ic`.
+~75% of the subtask boundaries were correctly identified by using the model [/models#idyom-select-maxlinks2-plus](/models#idyom-select-maxlinks2-plus) and the estimator `max_ig_ic`.
 
 ## Further Work
 
