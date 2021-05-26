@@ -175,7 +175,65 @@ Mean IC: 0.7924194
 ## idyom-select-maxlinks2-plus-stmo1-ltmo1
 
 ```
-(idyom:idyom 33 '(action) '((action agentinfront)(action agentright)(action agentleft)(action agentinfrontleft)(action agentinfrontleft)(action canseedoor)(action canseekey)(action distance)) :output-path "/Users/nick/Dropbox" :detail 3 :separator "," :stmo '(:order-bound 1) :ltmo '(:order-bound 1))
+(idyom:idyom 33 '(action) '((action agentinfront)(action agentright)(action agentleft)(action agentinfrontleft)(action agentinfrontleft)(action canseedoor)(action canseekey)(action distance)) :stmo '(:order-bound 1) :ltmo '(:order-bound 1))
 ```
 
 Mean IC: 1.0009514
+
+
+## idyom-select-maxlinks2-plus-ltm
+
+```
+(idyom:idyom 33 '(action) '((action agentinfront)(action agentright)(action agentleft)(action agentinfrontleft)(action agentinfrontleft)(action canseedoor)(action canseekey)(action distance)) :models :ltm)
+```
+
+Mean IC: 0.7965729
+
+## idyom-select-maxlinks2-plus-ltm-ltmo1
+
+```
+(idyom:idyom 33 '(action) '((action agentinfront)(action agentright)(action agentleft)(action agentinfrontleft)(action agentinfrontleft)(action canseedoor)(action canseekey)(action distance)) :models :ltm :ltmo '(:order-bound 1))
+```
+
+Mean IC: 0.98026925
+
+## idyom-select-maxlinks2-plus-ltm-ltmo2
+
+```
+(idyom:idyom 33 '(action) '((action agentinfront)(action agentright)(action agentleft)(action agentinfrontleft)(action agentinfrontleft)(action canseedoor)(action canseekey)(action distance)) :models :ltm :ltmo '(:order-bound 2))
+```
+
+Mean IC: 0.9034804
+
+## idyom-select-maxlinks2-plus-ltm-ltmo3
+
+```
+(idyom:idyom 33 '(action) '((action agentinfront)(action agentright)(action agentleft)(action agentinfrontleft)(action agentinfrontleft)(action canseedoor)(action canseekey)(action distance)) :models :ltm :ltmo '(:order-bound 3))
+```
+
+Mean IC: 0.8771507
+
+## idyom-select-maxlinks2-plus-ltm-ltmo4
+
+```
+(idyom:idyom 33 '(action) '((action agentinfront)(action agentright)(action agentleft)(action agentinfrontleft)(action agentinfrontleft)(action canseedoor)(action canseekey)(action distance)) :models :ltm :ltmo '(:order-bound 4))
+```
+
+Mean IC: 0.8619554
+
+## idyom-select-maxlinks2-plus-ltm-ltmo5
+
+```
+(idyom:idyom 33 '(action) '((action agentinfront)(action agentright)(action agentleft)(action agentinfrontleft)(action agentinfrontleft)(action canseedoor)(action canseekey)(action distance)) :models :ltm :ltmo '(:order-bound 5))
+```
+
+Mean IC: 0.85403854
+
+## idyom-select-maxlinks2-plus-ltm-ltmo6
+
+```
+(idyom:idyom 33 '(action) '((action agentinfront)(action agentright)(action agentleft)(action agentinfrontleft)(action agentinfrontleft)(action canseedoor)(action canseekey)(action distance)) :models :ltm :ltmo '(:order-bound 6))
+```
+
+Mean IC: 0.8451378
+
