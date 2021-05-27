@@ -19,46 +19,46 @@ title: The Information Dynamics of Gridworld
 
 ## Agent Behaviour Data Set
 
-We consider a highly simplified scenario in which a gridworld agent must open a door by first picking up a key. The task here is 'open door'. The (implicit) sub-tasks are 'pickup key' and 'unlock door'. Our aim is to identify the boundary between these sub-tasks.
+We consider a highly simplified scenario in which a gridworld agent must open a door by first picking up a key. The task here is 'open door'. The (implicit) sub-tasks are 'pickup key' and 'unlock door'. The last element in the sub-task 'pickup key' represents a state in which the previous action is 'pickup', the agent's position is unchanged, and the key is no longer visible.
 
 <img src="mission.png" alt="Example Mission" width="100%">
+
+The objective is to identify this boundary element between the sub-tasks using only the probabilities given by a statistical model build from agent behaviour data.
 
 The [data set](dataset.pkl) contains 1000 example missions recording the agent behavior undertaken to successfully 'open door'. Each example mission begins with a random configuration of agent, key and door. A jupyter notebook for exploring the raw data set can her found [here](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/dataset-explorer.ipynb).
 
 ## Representation
 
-We represent each example mission as a sequence. Elements in the sequence represents the state of the gridworld at that point in the mission, as well as the action performed immediately prior to entering that state. Sequence elements are represented as a collection of feature values. These features capture abstract information about the grid from both bird's-eye and first-person perspectives. Details of the representation are given below.
+We represent each example mission as a sequence. Elements in the sequence represents the state of the gridworld at that point in the mission, as well as the action performed immediately prior to entering that state. Each stage in the sequence is represented as a collection of feature values. These features capture abstract information about the grid from both bird's-eye and first-person perspectives. Details of the representation are given below.
 
 <embed src="https://n-harley.github.io/idyog/representation.pdf" type="application/pdf" width="100%" height="500"/>
 
 ## Statistical Modelling
 
-The features are used to construct statistical models of the object sequences. These models are constructed using IDyOM (<http://mtpearce.github.io/idyom/>). IDyOM is a multiple viewpoint system for capturing statistical patterns in multi-dimensional data. (It was originally applied to musical. However, the basic principle are applicable to any sequence.) We use a variety of models constructed by running IDyOM with different parameters. 
+The features are used to construct statistical models of the sequences. These models are constructed using IDyOM (<http://mtpearce.github.io/idyom/>). IDyOM is a multiple viewpoint system for capturing statistical patterns in multi-dimensional data. (It was originally applied to musical. However, the basic principle are applicable to any sequence.) We construct a variety of models by running IDyOM with different parameters. Details of these models than their paramters are given [here](./models.md) 
 
-The models give the information content of each object in a sequence (the degree to which it was unexpected), as well as the entropy at each point in the mission (the uncertainty of what comes next). Information content and entropy are used to define a variety of boundary strength profiles. By looking for peaks in these profiles, we can estimate the location of the sub-task boundary between 'pickup key' and 'open door'. We explore a variety of different boundary strength profiles and peak picking estimators, described [here](./subtask-detection.md)
+The models give a probability distribution of the next action at each stage in a mission. From this we compute the following:
 
-An explanation of how the models are computed can be found [here](./models.md). 
-
-A jupyter notebook for exploring the different models can be found [here](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/model-explorer.ipynb).
+- Information content `ic` can be see as expectedness of the current element in the context. 
+- Entropy `en` can be seen as the the uncertainty of what action will comes next in the current context. 
+- Information gain `ig` is the KL divergence between the distributions before and after the current element is processed.
 
 ## Sub-Task Boundary Detection
 
-The last element of the sequence representing the sub-task 'pickup key' represents a state in which the previous action is 'pickup', the agent's position is unchanged, and the key is no longer visible. The objective is to identify this boundary element between the sub-tasks using only the probabilities given by the statistical model.
-
-We assume that:
+By looking for peaks in these profiles, we can estimate the location of the sub-task boundary between 'pickup key' and 'open door'. To do this we assume that:
 
 1. The `ic` of the boundary element will be low.
 2. The `ic` of the element after the boundary element (i.e. the first element of the next sub-task) will be high. 
 3. The `en` at the boundary element will be high. 
 4. The `en` just before the boundary element will be low. 
-5. The `ig` (the KL divergence between the predictive distribution before and after the element is processed) at the boundary element will be high. 
+5. The `ig` at the boundary element will be high. 
 
-We consider the following detection methods:
+Given these assumptions We consider the following detection methods:
 
 - `min_ic`: minimum information content
-- `min_en`: minimum entropy
+- `min_en`: minimum entropy. 
 
-- `max_ic_diff`: maximum increase in information content
+- `max_ic_diff`: maximum increase in information content.
 - `max_en_diff`: maximum increase in entropy
 - `max_ig_diff`: maximum information gain
 
@@ -68,6 +68,9 @@ We consider the following detection methods:
 
 - `max_en_ic`: the maximum of entropy divided by information content
 - `max_ig_ic`: the maximum of information gain divided by information content
+
+A jupyter notebook for exploring the different models and boundary estimators can be found [here](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/model-explorer.ipynb).
+
 
 ## Results 
 
