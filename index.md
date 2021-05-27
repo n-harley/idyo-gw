@@ -75,11 +75,3 @@ A jupyter notebook for exploring the different models and boundary estimators ca
 ## Results 
 
 We calculate the numbers of correctly identified subtask boundaries for each model and each estimator. A jupyter notebook for computing these results is given [here](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/subtask-detection.ipynb).
-
-~75% of the subtask boundaries were correctly identified by using the model [./models#idyom-select-maxlinks2-plus](./models#idyom-select-maxlinks2-plus) and the estimator `max_ig_ic`.
-
-## Further Work
-
-- What models to use? 
-- More complex data? 
-- 
