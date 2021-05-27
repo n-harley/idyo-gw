@@ -21,7 +21,7 @@ title: The Information Dynamics of Gridworld
 
 We consider a highly simplified scenario in which a gridworld agent must open a door by first picking up a key. The task here is 'open door'. The (implicit) sub-tasks are 'pickup key' and 'unlock door'. The last element in the sub-task 'pickup key' represents a state in which the previous action is 'pickup', the agent's position is unchanged, and the key is no longer visible.
 
-<img src="mission.png" alt="Example Mission" width="100%">
+<img src="example-mission.png" alt="Example Mission" width="100%">
 
 The objective is to identify this boundary element between the sub-tasks using only the probabilities given by a statistical model build from agent behaviour data.
 
