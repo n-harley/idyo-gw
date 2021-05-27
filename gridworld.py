@@ -123,9 +123,17 @@ def set_xaxis(acns):
     plt.xlabel('action')
     plt.xlim(0,len(acns)-1)
 
-def mark(loc,c='y',linestyle='-',label=''):
-    plt.axvline(loc,-10,10,c=c,linestyle=linestyle)
-    plt.text(loc,1,label,rotation=90)
+def mark(loc,c='k',linestyle='-',label='',line=False,pos=1):
+    ax = plt.gca()        
+    if line:
+        plt.axvline(loc,-10,10,c=c,linestyle=linestyle)
+    else:
+        ax.annotate(label,(loc,pos),fontsize='large',horizontalalignment='right', verticalalignment='center')
+        ax.scatter([loc],[pos],s=200,color=c,marker='x',linewidth=4)
+        #plt.scatter([loc],[ypos],s=100,c=c,marker='x')
+        #plt.text(loc,ypos+0.3,label)
+    
+
 
 def display_state(data,id,s,a,o):
     state = states[id-1][s-1]
@@ -137,8 +145,8 @@ def display_state(data,id,s,a,o):
     ax = plt.gca()
     ax.axes.xaxis.set_visible(False)
     ax.set_yticks([])
+    ax.annotate('^', (agt_x,7-agt_y),fontsize='xx-large',rotation=o,fontweight='heavy',horizontalalignment='center', verticalalignment='center')
     plt.ylabel(a, fontsize='xx-large', fontweight='heavy')
-    plt.text(agt_x-0.25,7.25-agt_y,"^",fontsize='xx-large',rotation=o,fontweight='heavy')
 
 def display_mission(data,id):
     stateT = states[id-1]
