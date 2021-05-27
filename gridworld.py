@@ -157,6 +157,6 @@ def display_mission(data,id):
     rows = int(np.ceil(len(stateT)/5))
     fig = plt.gcf()
     fig = plt.figure(figsize=(20,5*rows))
-    for i in range(1,len(stateT)):
+    for i in range(1,len(stateT)+1):
         plt.subplot(rows,5,i)
         display_state(data,id,i,acn_ls[i-1],orn_rs[i-1])
