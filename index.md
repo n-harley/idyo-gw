@@ -3,9 +3,7 @@ layout: page
 title: The Information Dynamics of Gridworld
 ---
 
-#### Statistical modelling of agent behavior in minimalistic gridworld environments.  
-
-<https://n-harley.github.io/idyog>
+#### Statistical modelling of agent behavior in minimalistic gridworld environments.
 
 ## Introduction
 
@@ -14,38 +12,39 @@ title: The Information Dynamics of Gridworld
 - The goal of this work is to learn sub-task knowledge in an unsupervised manner.
 - We focus on minimalistic gridworld environments (<https://github.com/maximecb/gym-minigrid>).
 - We use an unsupervised learning algorithm called IDyOM (<http://mtpearce.github.io/idyom/>).
-- The algorithm constructs statistical models of patterns in agent behavior data.
+- We construct statistical models of patterns in agent behavior data.
 - We use these models to find the boundaries between sub-tasks.
+- ~97% of sub-task boundaries were identified by the method. 
 
 ## Agent Behaviour Data Set
 
-We consider a highly simplified scenario in which a gridworld agent must open a door by first picking up a key. The task here is 'open door'. The (implicit) sub-tasks are 'pickup key' and 'unlock door'. The last element in the sub-task 'pickup key' represents a state in which the previous action is 'pickup', the agent's position is unchanged, and the key is no longer visible.
+We consider the simple scenario where a gridworld agent must open a door by first picking up a key. The task here is *open door*. The (implicit) sub-tasks are *pickup key* and *unlock door*. The last element in the sub-task *pickup key* represents a state in which the previous action is *pickup*, the agent's position is unchanged, and the key is no longer visible.
 
 <img src="example-mission.png" alt="Example Mission" width="100%">
 
-The objective is to identify this boundary element between the sub-tasks using only the probabilities given by a statistical model build from agent behaviour data.
+The objective is to identify this highlighted boundary element between the sub-tasks using only the probabilities given by a statistical model built from examples of agent behaviour data.
 
-The [data set](dataset.pkl) contains 1000 example missions recording the agent behavior undertaken to successfully 'open door'. Each example mission begins with a random configuration of agent, key and door. A jupyter notebook for exploring the raw data set can her found [here](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/dataset-explorer.ipynb).
+The [data set](dataset.pkl) contains 1000 example missions recording the agent behavior undertaken to successfully *open door*. Each example mission begins with a random configuration of agent, key and door. A jupyter notebook for exploring the data set can be found [here](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/dataset-explorer.ipynb).
 
 ## Representation
 
-We represent each example mission as a sequence. Elements in the sequence represents the state of the gridworld at that point in the mission, as well as the action performed immediately prior to entering that state. Each stage in the sequence is represented as a collection of feature values. These features capture abstract information about the grid from both bird's-eye and first-person perspectives. Details of the representation are given below.
+We represent each example mission as a sequence. Elements in the sequence represents the state of the gridworld at that point in the mission, as well as the action performed immediately prior to entering that state. Each stage in the sequence is represented as a collection of feature values that capture abstract information about the grid from both bird's-eye and first-person perspectives. Details of the representation are given below.
 
 <embed src="https://n-harley.github.io/idyog/representation.pdf" type="application/pdf" width="100%" height="500"/>
 
 ## Statistical Modelling
 
-The features are used to construct statistical models of the sequences. These models are constructed using IDyOM (<http://mtpearce.github.io/idyom/>). IDyOM is a multiple viewpoint system for capturing statistical patterns in multi-dimensional data. (It was originally applied to musical. However, the basic principle are applicable to any sequence.) We construct a variety of models by running IDyOM with different parameters. Details of these models than their paramters are given [here](./models.md) 
+The features are used to construct statistical models of the sequences. These models are constructed using IDyOM (<http://mtpearce.github.io/idyom/>). IDyOM is a multiple viewpoint system for capturing statistical patterns in multi-dimensional data. It was originally intended for modelling music sequences but has much wider applicability. We construct a variety of models by running IDyOM with different parameters. Details of these models than their paramters are given [here](./models.md) 
 
-The models give a probability distribution of the next action at each stage in a mission. From this we compute the following:
+The models give a probability distribution of next actions for a given context. From this we compute the following for every example mission:
 
-- Information content `ic` can be see as expectedness of the current element in the context. 
-- Entropy `en` can be seen as the the uncertainty of what action will comes next in the current context. 
-- Information gain `ig` is the KL divergence between the distributions before and after the current element is processed.
+- The information content `ic` of each state. This can be see as *expectedness* of the state in the context. 
+- The entropy `en` of the at each stage of the mission. This can be seen as the *uncertainty* of what action will comes next in the current context. 
+- The information gain `ig` at each stage. This is the KL divergence between the distributions before and after the current element is processed.
 
 ## Sub-Task Boundary Detection
 
-By looking for peaks in these profiles, we can estimate the location of the sub-task boundary between 'pickup key' and 'open door'. To do this we assume that:
+By looking the peaks (and troughs) in these profiles, we estimate the location of the sub-task boundary between *pickup key* and *unlock door*. In addition to the basic profiles we consider their derivatives and some combinations and variations. The basic assumptions we use to locate the boundary are as follows:
 
 1. The `ic` of the boundary element will be low.
 2. The `ic` of the element after the boundary element (i.e. the first element of the next sub-task) will be high. 
@@ -53,25 +52,51 @@ By looking for peaks in these profiles, we can estimate the location of the sub-
 4. The `en` just before the boundary element will be low. 
 5. The `ig` at the boundary element will be high. 
 
-Given these assumptions We consider the following detection methods:
+In other words we expect `ic` and `en` to gradually fall as a sub-task proceeds with `ic` sharply rising at the boundary and `en` sharply rising just before the boundary. We compute the following peaks and troughs of the information profiles:
 
 - `min_ic`: minimum information content
-- `min_en`: minimum entropy. 
+- `min_en`: minimum entropy
+- `min_ig`: minimum information gain
+
+- `max_ic`: maximum information content
+- `max_en`: maximum entropy
+- `max_ig`: maximum information gain
 
 - `max_ic_diff`: maximum increase in information content.
 - `max_en_diff`: maximum increase in entropy
-- `max_ig_diff`: maximum information gain
+- `max_ig_diff`: maximum increase in information gain
 
-- `max_ic_diff_minus1`: one position before the maximum increase in information content
-- `max_en_diff_minus1`: one position before the maximum increase in entropy
-- `max_ig_diff_minus1`: one position before the maximum increase in information gain
+- `min_ic_diff`: maximum decrease in information content.
+- `min_en_diff`: maximum decrease in entropy
+- `min_ig_diff`: maximum decrease in information gain
+
+- `max_ic_diff_minus1`: one position before the maximum change in information content
+- `max_en_diff_minus1`: one position before the maximum change in entropy
+- `max_ig_diff_minus1`: one position before the maximum change in information gain
 
 - `max_en_ic`: the maximum of entropy divided by information content
 - `max_ig_ic`: the maximum of information gain divided by information content
 
 A jupyter notebook for exploring the different models and boundary estimators can be found [here](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/model-explorer.ipynb).
 
+## Results and Further Work
 
-## Results 
+To evaluate we calculate the numbers of correctly identified sub-task boundaries for each model and each estimator. A jupyter notebook for computing tables of results can be found [here](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/subtask-detection.ipynb).
 
-We calculate the numbers of correctly identified subtask boundaries for each model and each estimator. A jupyter notebook for computing these results is given [here](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/subtask-detection.ipynb).
+### Results
+
+- ~97% of boundaries can be identified using these naive techniques.
+- Best results are achieved using a bigram model incorporating all first-person viewpoints.
+- The best estimators for this model are `min_ic`, `max_ig_diff`, `max_en_ic` and `max_ig_ic`. 
+- Automatic viewpoint selection prioritises first-person viewpoints. 
+- The short term model component of IDYoM has little effect on sub-task boundary detection.
+- Restricting the order of the models improves sub-task boundary detection despite giving lower mean `ic`.
+
+### Further Work
+
+- Further analyis of IDYoM models.
+- Look more closely at the missions where it failed.
+- Perform a more 'mission-agnostic' segmentation and evaluation. 
+- Examine a more comprehensive selection of models. 
+- Perform viewpoint selection with model order limited.
+- Examine more complex data. 
