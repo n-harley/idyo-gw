@@ -1,4 +1,4 @@
-title: idyog
+title: IDyOG
 author:
   name: Nicholas Harley
   email: nicholas.harley@vub.be
@@ -15,4 +15,5 @@ theme: minima
 minima:
   social_links: 
     github: n-harley
-header_pages:	
+header_pages:
+  - contents.md	

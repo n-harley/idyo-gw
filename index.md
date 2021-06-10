@@ -5,6 +5,8 @@ title: The Information Dynamics of Gridworld
 
 #### Statistical modelling of agent behaviour in minimalistic gridworld environments.
 
+Github repo: <https://www.github.com/n-harley/idyog/>
+
 ## Introduction
 
 - Partial observability, dynamic environments, hidden rewards and explainability are problems for RL models. 
