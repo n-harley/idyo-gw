@@ -36,7 +36,7 @@ We represent each example mission as a sequence. Elements in the sequence repres
 
 ## Statistical Modelling
 
-The features are used to construct statistical models of the sequences. These models are constructed using IDyOM (<http://mtpearce.github.io/idyom/>). IDyOM is a multiple viewpoint system [Conklin & Witten, 1995](https://www.tandfonline.com/doi/abs/10.1080/09298219508570672) for capturing statistical patterns in multi-dimensional data. It was originally intended for modelling music sequences but has much wider applicability. We construct a variety of models by running IDyOM with different parameters. Details of these models and their parameters are given [here](./models.md) 
+The features are used to construct statistical models of the sequences. These models are constructed using IDyOM (<http://mtpearce.github.io/idyom/>). IDyOM is a multiple viewpoint system [(Conklin & Witten, 1995)](https://www.tandfonline.com/doi/abs/10.1080/09298219508570672) for capturing statistical patterns in multi-dimensional data. It was originally intended for modelling music sequences but has much wider applicability. We construct a variety of models by running IDyOM with different parameters. Details of these models and their parameters are given [here](./models.md) 
 
 The models give a probability distribution for the next action in a given context. From this we compute the following for every example mission:
 
