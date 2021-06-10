@@ -15,5 +15,4 @@ theme: minima
 minima:
   social_links: 
     github: n-harley
-header_pages:
-  - models.md	
+header_pages:	
