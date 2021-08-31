@@ -5,4 +5,4 @@
 
 This repository contains preliminary experiements investigating the use of statistical models to detect sub-task boundaries in data describing the behaviour of agents in minimalistic gridword environments.
 
-<https://n-harley.github.io/idyog>
+<https://nick-harley.github.io/idyog>
