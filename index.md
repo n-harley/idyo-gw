@@ -5,7 +5,7 @@ title: The Information Dynamics of Gridworld
 
 #### Statistical modelling of agent behaviour in minimalistic gridworld environments.
 
-Github repo: <https://www.github.com/n-harley/idyog/>
+Github repo: <https://www.github.com/nick-harley/idyog/>
 
 ## Introduction
 
@@ -26,7 +26,7 @@ We consider the simple scenario where a gridworld agent must open a door by firs
 
 The objective is to identify this highlighted boundary element between the sub-tasks using only the probabilities given by a statistical model built from examples of agent behaviour data.
 
-The [data set](dataset.pkl) contains 1000 example missions recording the agent behavior undertaken to successfully *open door*. Each example mission begins with a random configuration of agent, key and door. A jupyter notebook for exploring the data set can be found [here](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/dataset-explorer.ipynb).
+The [data set](dataset.pkl) contains 1000 example missions recording the agent behavior undertaken to successfully *open door*. Each example mission begins with a random configuration of agent, key and door. A jupyter notebook for exploring the data set can be found [here](https://nbviewer.jupyter.org/github/nick-harley/idyog/blob/main/dataset-explorer.ipynb).
 
 ## Representation
 
@@ -85,11 +85,11 @@ In other words we expect `ic` and `en` to gradually fall as a sub-task proceeds 
 - `max_en_ic`: the maximum of entropy divided by information content
 - `max_ig_ic`: the maximum of information gain divided by information content
 
-A jupyter notebook for exploring the different models and boundary estimators can be found [here](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/model-explorer.ipynb).
+A jupyter notebook for exploring the different models and boundary estimators can be found [here](https://nbviewer.jupyter.org/github/nick-harley/idyog/blob/main/model-explorer.ipynb).
 
 ## Results and Further Work
 
-To evaluate this method we calculate the numbers of correctly identified sub-task boundaries for each model and each estimator. A jupyter notebook for computing tables of results can be found [here](https://nbviewer.jupyter.org/github/n-harley/idyog/blob/main/subtask-detection.ipynb).
+To evaluate this method we calculate the numbers of correctly identified sub-task boundaries for each model and each estimator. A jupyter notebook for computing tables of results can be found [here](https://nbviewer.jupyter.org/github/nick-harley/idyog/blob/main/subtask-detection.ipynb).
 
 ### Results
 
