@@ -32,7 +32,7 @@ The [data set](dataset.pkl) contains 1000 example missions recording the agent b
 
 We represent each example mission as a sequence. Elements in the sequence represents the state of the gridworld at that point in the mission, as well as the action performed immediately prior to entering that state. Each stage in the sequence is represented as a collection of feature values that capture abstract information about the grid from both bird's-eye and first-person perspectives. Details of the representation are given below.
 
-<embed src="https://n-harley.github.io/idyog/representation.pdf" type="application/pdf" width="100%" height="500"/>
+<embed src="https://nick-harley.github.io/idyog/representation.pdf" type="application/pdf" width="100%" height="500"/>
 
 ## Statistical Modelling
 
